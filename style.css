@@ -3,3 +3,24 @@
 	float: left;
 	margin: 0%;
 }
+#bw_svg:hover{
+	font-weight: bolder;
+}
+
+/*      */
+
+body {
+    font: 5px sans-serif;
+}
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+    shape-rendering: geometricPrecision;
+}
