@@ -16,7 +16,7 @@
             fill: none;
             stroke: steelblue;
             stroke-width: 1.5px;
-            shape-rendering: optimizeSpeed;
+            shape-rendering: geometricPrecision;
         }
     </style>
 </head>
@@ -230,9 +230,9 @@
     </script>
     <script>
     var margin = {
-            top: 5,
+            top: 10,
             right: 5,
-            bottom: 20,
+            bottom: 25,
             left: 20
         },
         width = 280 - margin.left - margin.right,
@@ -286,7 +286,8 @@
             .call(xAxis)
             .append("text")
             .attr("x","100")
-            .attr("y", "20")
+            .attr("y", "23")
+            .style("font-size","10px")
             .text("Month/Yr");
 
         svg.append("g")
@@ -295,6 +296,7 @@
             .append("text")
             .attr("x","3")
             .attr("y","2")
+            .style("font-size","10px")
             .text("Avg weight (kg)");
 
         svg.append("path")
