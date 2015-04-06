@@ -4,12 +4,13 @@
 	margin: 0%;
 }
 #bw_svg:hover{
-	font-weight: bolder;
+	cursor: pointer;
 }
 
-/*      */
+/*----------------------*/
 
 body {
+	font-family: Arial;
     font: 5px sans-serif;
 }
 .axis path,
