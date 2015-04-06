@@ -1,24 +1,214 @@
 <html>
 <head>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div id="wrapper">
+    <div class="block" id="block1">
+        <!-- Birth Weight -->
+            <svg width="310" height="310">
+                <g id="BW_group">
+                    <rect id="bw_rect" x="5" y="5" height="300" width="300" fill="orange" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
+                    <text x="20" y="40" font-size="25" font-family="Helvetica Neue" >Birth Weight</text>
+                    <text x="20" y="60" font-size="15" font-family="Helvetica Neue" >(Average kg)</text>
+                    <text id="bw_val2" x="201.5" y="121.5" font-size="50" font-family="Helvetica Neue"></text>
+                    <text id="bw_val" x="200" y="120" font-size="50" font-family="Helvetica Neue"></text>
+                    <text id="bw_per2" x="201.5" y="151.5" font-size="25" font-family="Helvetica Neue"></text>
+                    <text id="bw_per" x="200" y="150" font-size="25" font-family="Helvetica Neue"></text>
+                    <text id="bw_tar2" x="201.5" y="171.5" font-size="15" font-family="Helvetica Neue"></text>
+                    <text id="bw_tar" x="200" y="170" font-size="15" font-family="Helvetica Neue"></text>
+                </g>
+            </svg>
+
+        <!-- Cesarean Rate -->
+            <svg width="310" height="310">  
+                <g id="CR_group">
+                    <rect id="cr_rect" x="5" y="5" height="300" width="300" fill="red" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
+                    <text x="20" y="40" font-size="25" font-family="Helvetica Neue" >Cesarean Rate</text>
+                    <text x="20" y="60" font-size="15" font-family="Helvetica Neue" >(% of Total Births)</text>
+                    <text id="cr_val2" x="121.5" y="121.5" font-size="50" font-family="Helvetica Neue"></text>
+                    <text id="cr_val" x="120" y="120" font-size="50" font-family="Helvetica Neue"></text>
+                    <text id="cr_per2" x="121.5" y="151.5" font-size="25" font-family="Helvetica Neue"></text>
+                    <text id="cr_per" x="120" y="150" font-size="25" font-family="Helvetica Neue"></text>
+                    <text id="cr_tar2" x="121.5" y="171.5" font-size="15" font-family="Helvetica Neue"></text>
+                    <text id="cr_tar" x="120" y="170" font-size="15" font-family="Helvetica Neue"></text>
+                </g>
+            </svg>
+
+        <!-- Stillbirth Rate -->
+            <svg width="310" height="310">  
+                <g id="SR_group">
+                    <rect id="sr_rect" x="5" y="5" height="300" width="300" fill="green" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
+                    <text x="20" y="40" font-size="25" font-family="Helvetica Neue" >Stillbirth Rate</text>
+                    <text x="20" y="60" font-size="15" font-family="Helvetica Neue" >(% of Total Births)</text>
+                    <text id="sr_val2" x="151.5" y="121.5" font-size="50" font-family="Helvetica Neue"></text>
+                    <text id="sr_val" x="150" y="120" font-size="50" font-family="Helvetica Neue"></text>
+                    <text id="sr_per2" x="151.5" y="151.5" font-size="25" font-family="Helvetica Neue"></text>
+                    <text id="sr_per" x="150" y="150" font-size="25" font-family="Helvetica Neue"></text>
+                    <text id="sr_tar2" x="151.5" y="171.5" font-size="15" font-family="Helvetica Neue"></text>
+                    <text id="sr_tar" x="150" y="170" font-size="15" font-family="Helvetica Neue"></text>
+                </g>
+            </svg>
+
+        <!-- Congenital Diseases -->
+            <svg width="310" height="310">
+                <g id="CD_group">
+                    <rect id="cd_rect" x="5" y="5" height="300" width="300" fill="orange" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
+                    <text x="20" y="40" font-size="25" font-family="Helvetica Neue" >Congenital Diseases</text>
+                    <text x="20" y="60" font-size="15" font-family="Helvetica Neue" >(% of Total Births)</text>
+                </g>
+            </svg>
+    </div>
+    <div class="block" id="block2">
+        <!-- Blank 1 -->
+            <svg width="310" height="310">  
+                <g id="blank">
+                    <rect id="blank_rect" x="5" y="5" height="300" width="300" fill="grey" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
+                </g>
+            </svg>
+            <svg width="310" height="310">
+                <use xlink:href="#blank"/>
+            </svg>
+            <svg width="310" height="310">
+                <use xlink:href="#blank"/>
+            </svg>
+            <svg width="310" height="310">
+                <use xlink:href="#blank"/>
+            </svg>
+    </div>
+    <div class="block" id="block3">
+        <!-- Blank 2 -->
+            <svg width="310" height="310">
+                <use xlink:href="#blank"/>
+            </svg>
+            <svg width="310" height="310">
+                <use xlink:href="#blank"/>
+            </svg>
+            <svg width="310" height="310">
+                <use xlink:href="#blank"/>
+            </svg>
+            <svg width="310" height="310">
+                <use xlink:href="#blank"/>
+            </svg>
+    </div>
+    <div class="block" id="block4">
+        <!-- Blank 3 -->
+            <svg width="310" height="310">
+                <use xlink:href="#blank"/>
+            </svg>
+            <svg width="310" height="310">
+                <use xlink:href="#blank"/>
+            </svg>
+            <svg width="310" height="310">
+                <use xlink:href="#blank"/>
+            </svg>
+            <svg width="310" height="310">
+                <use xlink:href="#blank"/>
+            </svg>
+    </div>
+</div>
     <script type="text/javascript">
-    d3.select("body")
-    .append("svg")
-    .attr("width", 500)
-    .attr("height", 500)
-    .append("rect")
-    .attr("x", 10)
-    .attr("y", 10)
-    .attr("height", 200)
-    .attr("width", 200)
-    .attr("fill", "green");
+        /* Birth Weight */
+            var bwValue = 3.71;
+            var bwTarget = 3.40;
+            bwTarget = bwTarget.toFixed(2);
+            d3.select("#bw_val")
+                .attr("fill","white")
+                .text(bwValue);
+            d3.select("#bw_val2")
+                .attr("fill","black")
+                .text(bwValue);
+            var bwAverage = ((bwValue - bwTarget)/bwTarget)*100;
+            var bw_prefix = "";
+            function roundToTwo(num) {
+                if(bwAverage>0){  
+                    bw_prefix = "+";
+                }else{
+                    bw_prefix = "-";
+                }
+                return +(Math.round(num + "e+2")  + "e-2");
+            }
+            bwAverage = roundToTwo(bwAverage);
+            d3.select("#bw_per")
+                .attr("fill","white")
+                .text(bw_prefix + bwAverage + "%");
+            d3.select("#bw_per2")
+                .attr("fill","black")
+                .text(bw_prefix + bwAverage + "%");
+
+            d3.select("#bw_tar")
+                .attr("fill","white")
+                .text("Target: "+bwTarget);
+            d3.select("#bw_tar2")
+                .attr("fill","black")
+                .text("Target: "+bwTarget);
+        /* Cesarean Rate */
+            var crValue = 24.75;
+            var crTarget = 20;
+            d3.select("#cr_val")
+                .attr("fill","white")
+                .text(crValue+"%");
+            d3.select("#cr_val2")
+                .attr("fill","black")
+                .text(crValue+"%");
+            var crAverage = (crValue - crTarget);
+            var cr_prefix = "";
+            function roundToTwo(num) {
+                if(crAverage>0){  
+                    cr_prefix = "+";
+                }else{
+                    cr_prefix = "-";
+                }
+                return +(Math.round(num + "e+2")  + "e-2");
+            }
+            crAverage = roundToTwo(crAverage);
+            d3.select("#cr_per")
+                .attr("fill","white")
+                .text(cr_prefix + crAverage + "%");
+            d3.select("#cr_per2")
+                .attr("fill","black")
+                .text(cr_prefix + crAverage + "%");
+
+            d3.select("#cr_tar")
+                .attr("fill","white")
+                .text("Target: "+crTarget + "%");
+            d3.select("#cr_tar2")
+                .attr("fill","black")
+                .text("Target: "+crTarget +"%");
+        /* Stillbirth Rate */
+            var srValue = 0.73;
+            var srTarget = 0.80;
+            srTarget = srTarget.toFixed(2);
+            d3.select("#sr_val")
+                .attr("fill","white")
+                .text(srValue+"%");
+            d3.select("#sr_val2")
+                .attr("fill","black")
+                .text(srValue+"%");
+            var srAverage = (srValue - srTarget);
+            var sr_prefix = "";
+            function roundToTwo(num) {
+                if(srAverage>0){  
+                    sr_prefix = "+";
+                }
+                return +(Math.round(num + "e+2")  + "e-2");
+            }
+            srAverage = roundToTwo(srAverage);
+            d3.select("#sr_per")
+                .attr("fill","white")
+                .text(sr_prefix + srAverage + "%");
+            d3.select("#sr_per2")
+                .attr("fill","black")
+                .text(sr_prefix + srAverage + "%");
+
+            d3.select("#sr_tar")
+                .attr("fill","white")
+                .text("Target: "+srTarget + "%");
+            d3.select("#sr_tar2")
+                .attr("fill","black")
+                .text("Target: "+srTarget +"%");
+        /* Congenital Diseases*/
     </script>
-    <svg width="500" height="500">
-        <g>
-            <circle cx="50" cy="50" r="50" fill="red" />
-        </g>
-    </svg>
 </body>
 </html>
