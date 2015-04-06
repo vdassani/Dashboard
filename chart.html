@@ -4,31 +4,46 @@
 body {
     font: 10px sans-serif;
 }
+
 .axis path,
 .axis line {
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
 }
+
 .line {
     fill: none;
     stroke: steelblue;
     stroke-width: 1.5px;
     shape-rendering: optimizeSpeed;
 }
+#button{
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    position: relative;
+    font-size: 20px;
+    transform: translateY(15px);
+}
 </style>
 
 <body>
+    <div id="button">
+        <a href="index.html">Back</a>
+    </div>
+    <svg id="chart" height="600" width="900">
+    </svg>
     <script src="http://d3js.org/d3.v3.js"></script>
     <script>
     var margin = {
-            top: 5,
+            top: 10,
             right: 5,
-            bottom: 5,
-            left: 5
+            bottom: 35,
+            left: 30
         },
-        width = 275 - margin.left - margin.right,
-        height = 100 - margin.top - margin.bottom;
+        width = 800 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
 
     var parseDate = d3.time.format("%d-%b-%y").parse;
 
@@ -40,13 +55,11 @@ body {
 
     var xAxis = d3.svg.axis()
         .scale(x)
-        .orient("bottom")
-        .ticks(0);
+        .orient("bottom");
 
     var yAxis = d3.svg.axis()
         .scale(y)
-        .orient("left")
-        .ticks(0);
+        .orient("left");
 
     var line = d3.svg.line()
         .x(function(d) {
@@ -57,7 +70,7 @@ body {
         });
 
 
-    var svg = d3.select("#bw_chart")
+    var svg = d3.select("#chart")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -79,13 +92,19 @@ body {
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis)
             .append("text")
-            .attr("x", (width/2)-30)
-            .attr("y","-10")
-            .text("2012-2014");
+            .attr("x", "350")
+            .attr("y", "35")
+            .style("font-size", "15px")
+            .text("Month/Yr");
 
         svg.append("g")
             .attr("class", "y axis")
-            .call(yAxis);
+            .call(yAxis)
+            .append("text")
+            .attr("x", "5")
+            .attr("y", "5")
+            .style("font-size", "15px")
+            .text("Avg weight (kg)");
 
         svg.append("path")
             .datum(data)
