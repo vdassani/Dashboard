@@ -1,49 +1,21 @@
 <html>
-<meta charset="utf-8">
-<style>
-body {
-    font-family: Arial;
-    font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-}
-
-.line {
-    fill: none;
-    stroke: steelblue;
-    stroke-width: 1.5px;
-    shape-rendering: optimizeSpeed;
-}
-#button{
-    height: auto;
-    width: 50px;
-    text-align: center;
-    position: relative;
-    font-size: 20px;
-}
-</style>
-
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
 <body>
-    <div id="button">
-        <a href="index.html">Back</a>
-    </div>
-    <svg id="chart" height="600" width="900">
+    <svg id="chartt" height="600" width="900">
     </svg>
     <script src="http://d3js.org/d3.v3.js"></script>
     <script>
     var margin = {
             top: 10,
             right: 5,
-            bottom: 35,
-            left: 30
+            bottom: 25,
+            left: 20
         },
-        width = 800 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        width = 280 - margin.left - margin.right,
+        height = 100 - margin.top - margin.bottom;
 
     var parseDate = d3.time.format("%d-%b-%y").parse;
 
@@ -57,7 +29,7 @@ body {
         .scale(x)
         .orient("bottom");
 
-    var yAxis = d3.svg.axis()
+    var WyAxis = d3.svg.axis()
         .scale(y)
         .orient("left");
 
@@ -70,16 +42,16 @@ body {
         });
 
 
-    var svg = d3.select("#chart")
+    var svg = d3.select("#chartt")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.csv("Book1.csv", function(error, data) {
+    d3.csv("data.csv", function(error, data) {
         data.forEach(function(d) {
             d.date = parseDate(d.date);
-            d.weight = +d.weight;
+            d.weight = +(d.weight);
         });
 
         x.domain(d3.extent(data, function(d) {
@@ -92,18 +64,18 @@ body {
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis)
             .append("text")
-            .attr("x", "350")
-            .attr("y", "35")
-            .style("font-size", "15px")
+            .attr("x","100")
+            .attr("y", "23")
+            .style("font-size","10px")
             .text("Month/Yr");
 
         svg.append("g")
             .attr("class", "y axis")
-            .call(yAxis)
+            .call(WyAxis)
             .append("text")
-            .attr("x", "5")
-            .attr("y", "5")
-            .style("font-size", "15px")
+            .attr("x","3")
+            .attr("y","2")
+            .style("font-size","10px")
             .text("Avg weight (kg)");
 
         svg.append("path")
@@ -114,5 +86,4 @@ body {
     });
     </script>
 </body>
-
 </html>
