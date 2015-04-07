@@ -12,17 +12,19 @@
     <div id="button">
         <a href="index.html">Back</a>
     </div>
+    <div id="title">Avg. Stillbirth Rate
+    </div>
     <div id="chart"></div>
     <script>
         var chart = c3.generate({
             bindto: '#chart',
             data: {
-                url: 'BWdata.csv',
+                url: 'SRdata.csv',
                 type: 'spline',
                 x: 'date',
-                xFormat: '%d-%m-%Y',
+                xFormat: '%d/%m/%Y',
                 names: {
-                    weight: 'UAE',
+                    stillbirth: 'UAE',
                     abudhabi: 'Abu Dhabi',
                     ajman: 'Ajman',
                     dubai: 'Dubai',
@@ -30,6 +32,16 @@
                     rak: 'Ras Al-Khaimah',
                     sharjah: 'Sharjah',
                     uaq: 'Umm Al-Quwain'
+                },
+                colors: {
+                    stillbirth: 'red',
+                    abudhabi: '#002776',
+                    ajman: '#BDD203',
+                    dubai: '#00A1DE',
+                    fuj: '#81BC00',
+                    rak: '#3C8A2E',
+                    sharjah: '#72C7E7',
+                    uaq: '#313131'
                 },
                 hide: ['abudhabi', 'ajman', 'dubai', 'fuj', 'rak', 'sharjah', 'uaq']
             },
@@ -42,7 +54,7 @@
                     }
                 },
                 y: {
-                    label: 'Avg. Weight'
+                    label: '% of Total'
                 }
             },
             zoom: {

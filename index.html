@@ -9,7 +9,7 @@
     <div id="wrapper">
         <div class="block">
             <!-- Birth Weight -->
-            <svg width="310" height="310" onclick="location.href='c3demo.html';" class="links">
+            <svg width="310" height="310" onclick="location.href='c3BW.html';" class="links">
                 <g id="BW_group">
                     <rect id="bw_rect" x="5" y="5" height="300" width="300" fill="orange" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
                     <text x="20" y="40" font-size="25" font-family="Arial">Birth Weight</text>
@@ -22,7 +22,7 @@
                 </g>
             </svg>
             <!-- Stillbirth Rate -->
-            <svg width="310" height="310" onclick="location.href='stillChart.html';" class="links">
+            <svg width="310" height="310" onclick="location.href='c3SR.html';" class="links">
                 <g id="SR_group">
                     <rect id="sr_rect" x="5" y="5" height="300" width="300" fill="green" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
                     <text x="20" y="40" font-size="25" font-family="Arial">Stillbirth Rate</text>
@@ -37,7 +37,7 @@
         </div>
         <div class="block">
             <!-- Cesarean Rate -->
-            <svg width="310" height="310" onclick="location.href='cesChart.html';" class="links">
+            <svg width="310" height="310" onclick="location.href='c3CR.html';" class="links">
                 <g id="CR_group">
                     <rect id="cr_rect" x="5" y="5" height="300" width="300" fill="red" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
                     <text x="20" y="40" font-size="25" font-family="Arial">Cesarean Rate</text>
@@ -58,6 +58,7 @@
                 </g>
             </svg>
         </div>
+        <!--
         <div class="block">
             <svg width="310" height="310" onclick="location.href='moiChart.html';" class="links">
                 <g id="MOI_group">
@@ -72,6 +73,17 @@
                     <text x="60" y="140" font-size="30" font-family="Arial">Ras Al Khaimah</text>
                     <text x="60" y="155" font-size="16" font-family="Arial">Contextual storyline</text>
                 </g>
+            </svg>
+        </div>
+        -->
+        <div class="block">
+            <svg width="310" height="310">
+                <g id="blank">
+                    <rect id="blank_rect" x="5" y="5" height="300" width="300" fill="grey" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
+                </g>
+            </svg>
+            <svg width="310" height="310">
+                <use xlink:href="#blank" />
             </svg>
         </div>
         <div class="block">
@@ -196,7 +208,7 @@
 
         var parseDate = d3.time.format("%d-%b-%y").parse;
 
-        d3.csv("data.csv", function (error, data) {
+        d3.csv("d3data.csv", function (error, data) {
             data.forEach(function (d) {
                 d.date = parseDate(d.date);
                 d.weight = +d.weight;

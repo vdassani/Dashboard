@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.css" />
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="c3Style.css" />
+    <link rel="stylesheet" type="text/css" href="chart.css" />
+</head>
+
+<body>
+    <div id="button">
+        <a href="index.html">Back</a>
+    </div>
+    <div id="title">Avg. Birth Weights
+    </div>
+    <div id="chart"></div>
+    <script>
+        var chart = c3.generate({
+            bindto: '#chart',
+            data: {
+                url: 'BWdata.csv',
+                type: 'spline',
+                x: 'date',
+                xFormat: '%d-%m-%Y',
+                names: {
+                    weight: 'UAE',
+                    abudhabi: 'Abu Dhabi',
+                    ajman: 'Ajman',
+                    dubai: 'Dubai',
+                    fuj: 'Fujairah',
+                    rak: 'Ras Al-Khaimah',
+                    sharjah: 'Sharjah',
+                    uaq: 'Umm Al-Quwain'
+                },
+                colors: {
+                    weight: 'red',
+                    abudhabi: '#002776',
+                    ajman: '#BDD203',
+                    dubai: '#00A1DE',
+                    fuj: '#81BC00',
+                    rak: '#3C8A2E',
+                    sharjah: '#72C7E7',
+                    uaq: '#313131'
+                },
+                hide: ['abudhabi', 'ajman', 'dubai', 'fuj', 'rak', 'sharjah', 'uaq']
+            },
+            axis: {
+                x: {
+                    label: 'Mon-Yr',
+                    type: 'timeseries',
+                    tick: {
+                        format: '%m-%y'
+                    }
+                },
+                y: {
+                    label: 'Avg. Weight'
+                }
+            },
+            zoom: {
+                enabled: true
+            },
+            subchart: {
+                show: true
+            }
+        });
+    </script>
+</body>
+
+</html>
