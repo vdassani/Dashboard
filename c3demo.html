@@ -5,9 +5,13 @@
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="c3Style.css" />
+    <link rel="stylesheet" type="text/css" href="chart.css" />
 </head>
 
 <body>
+    <div id="button">
+        <a href="index.html">Back</a>
+    </div>
     <div id="chart"></div>
     <script>
         var chart = c3.generate({
@@ -18,8 +22,16 @@
                 x: 'date',
                 xFormat: '%d-%m-%Y',
                 names: {
-                    weight: 'Avg. Weight'
-                }
+                    weight: 'UAE',
+                    abudhabi: 'Abu Dhabi',
+                    ajman: 'Ajman',
+                    dubai: 'Dubai',
+                    fuj: 'Fujairah',
+                    rak: 'Ras Al-Khaimah',
+                    sharjah: 'Sharjah',
+                    uaq: 'Umm Al-Quwain'
+                },
+                hide: ['abudhabi', 'ajman', 'dubai', 'fuj', 'rak', 'sharjah', 'uaq']
             },
             axis: {
                 x: {
