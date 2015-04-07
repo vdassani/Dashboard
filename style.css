@@ -1,24 +1,26 @@
-.block{
-	max-width: 315px;
-	float: left;
-	margin: 0%;
-}
-.links:hover{
-	cursor: pointer;
+.block {
+    max-width: 315px;
+    float: left;
+    margin: 0%;
 }
 
+.links:hover {
+    cursor: pointer;
+}
 /*----------------------*/
 
 body {
-	font-family: Arial;
-    font: 5px sans-serif;
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    font-size: 5px;
 }
+
 .axis path,
 .axis line {
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
 }
+
 .line {
     fill: none;
     stroke: steelblue;
