@@ -121,10 +121,11 @@
         d3.select("#vs_tar3")
             .attr("fill", "white")
             .text("vs. target");
-        var numVal = 299691;
+        var numVal = "299,691";
         var cdVal = 0.326;
         d3.select("#num_val")
-            .attr("fill", "white")
+
+        .attr("fill", "white")
             .text(numVal);
         d3.select("#cd_val")
             .attr("fill", "white")
@@ -360,7 +361,8 @@
             bw.append("path")
                 .datum(data)
                 .attr("class", "line")
-                .attr("d", bwline);
+                .attr("d", bwline)
+                .style("stroke", "white");
 
             cr.append("g")
                 .attr("class", "x axis")
@@ -384,7 +386,8 @@
             cr.append("path")
                 .datum(data)
                 .attr("class", "line")
-                .attr("d", crline);
+                .attr("d", crline)
+                .style("stroke", "white");
 
             sr.append("g")
                 .attr("class", "x axis")
@@ -408,7 +411,8 @@
             sr.append("path")
                 .datum(data)
                 .attr("class", "line")
-                .attr("d", srline);
+                .attr("d", srline)
+                .style("stroke", "white");
 
             cd.append("g")
                 .attr("class", "x axis")
@@ -432,7 +436,8 @@
             cd.append("path")
                 .datum(data)
                 .attr("class", "line")
-                .attr("d", cdline);
+                .attr("d", cdline)
+                .style("stroke", "white");
 
             pop.append("g")
                 .attr("class", "x axis")
@@ -456,7 +461,8 @@
             pop.append("path")
                 .datum(data)
                 .attr("class", "line")
-                .attr("d", popline);
+                .attr("d", popline)
+                .style("stroke", "white");
 
         });
     </script>
