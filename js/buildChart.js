@@ -18,7 +18,7 @@ function buildIt(priority, short, rect, value, val_loc, per_loc, suffix, target,
         diff,
         prefix = "";
 
-    d3.csv("d3data.csv", function (error, data) {
+    d3.csv("./data/d3data.csv", function (error, data) {
         data.forEach(function (d) {
             d.date = parseDate(d.date);
             d.weight = +d.weight;
