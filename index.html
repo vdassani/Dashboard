@@ -50,37 +50,35 @@
                 </g>
             </svg>
             <!-- Congenital Diseases -->
-            <svg width="310" height="310" onclick="location.href='congChart.html';" class="links">
+            <svg width="310" height="310" onclick="location.href='c3CD.html';" class="links">
                 <g id="CD_group">
                     <rect id="cd_rect" x="5" y="5" height="300" width="300" fill="orange" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
                     <text x="20" y="40" font-size="25" font-family="Arial">Congenital Diseases</text>
                     <text x="20" y="60" font-size="15" font-family="Arial">(% of Total Births)</text>
+                    <text id="cd_val" x="120" y="120" font-size="50" font-family="Arial"></text>
+                    <svg id="cd_chart" x="15" y="190" width="275" height="100"></svg>
                 </g>
             </svg>
         </div>
-        <!--
         <div class="block">
-            <svg width="310" height="310" onclick="location.href='moiChart.html';" class="links">
-                <g id="MOI_group">
-                    <rect id="moi_rect" x="5" y="5" height="300" width="300" fill="#1B3277" stroke="black" stroke-width="0.5" fill-opacity="0.5" />
-                    <text x="60" y="140" font-size="30" font-family="Arial">MOI/EIDA</text>
-                    <text x="60" y="155" font-size="16" font-family="Arial">Exemplar Dashboard</text>
+            <svg width="310" height="310" onclick="location.href='numChart.html';" class="links">
+                <g id="num_group">
+                    <rect id="num_rect" x="5" y="5" height="300" width="300" fill="#1B3277" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
+                    <text x="20" y="40" font-size="25" font-family="Arial">Number of Births</text>
+                    <text x="20" y="60" font-size="15" font-family="Arial">(Across UAE 2012-2014)</text>
+                    <text id="num_val" x="120" y="120" font-size="50" font-family="Arial"></text>
+                    <svg id="num_chart" x="15" y="190" width="275" height="100"></svg>
                 </g>
             </svg>
-            <svg width="310" height="310" onclick="location.href='rakChart.html';" class="links">
-                <g id="RAK_group">
-                    <rect id="rak_rect" x="5" y="5" height="300" width="300" fill="#1B3277" stroke="black" stroke-width="0.5" fill-opacity="0.5" />
-                    <text x="60" y="140" font-size="30" font-family="Arial">Ras Al Khaimah</text>
-                    <text x="60" y="155" font-size="16" font-family="Arial">Contextual storyline</text>
-                </g>
-            </svg>
-        </div>
-        -->
-        <div class="block">
             <svg width="310" height="310">
                 <g id="blank">
                     <rect id="blank_rect" x="5" y="5" height="300" width="300" fill="grey" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
                 </g>
+            </svg>
+        </div>
+        <div class="block">
+            <svg width="310" height="310">
+                <use xlink:href="#blank" />
             </svg>
             <svg width="310" height="310">
                 <use xlink:href="#blank" />
@@ -123,6 +121,14 @@
         d3.select("#vs_tar3")
             .attr("fill", "white")
             .text("vs. target");
+        var numVal = 299691;
+        var cdVal = 0.326;
+        d3.select("#num_val")
+            .attr("fill", "white")
+            .text(numVal);
+        d3.select("#cd_val")
+            .attr("fill", "white")
+            .text(cdVal + "%");
         /* Birth Weight */
         var bwValue = 3.71;
         var bwTarget = 3.40;
@@ -214,10 +220,8 @@
                 d.weight = +d.weight;
                 d.cesarean = +(d.cesarean * 100);
                 d.stillborn = +(d.stillborn * 100);
-                d.atrio = +(d.atrio * 100);
-                d.cleft = +(d.cleft * 100);
-                d.down = +(d.down * 100);
-                d.rectal = +(d.rectal * 100);
+                d.cong = +(d.cong * 100);
+                d.pop = +d.pop;
             });
 
             var x = d3.time.scale()
@@ -228,6 +232,10 @@
             var cry = d3.scale.linear()
                 .range([height, 0]);
             var sry = d3.scale.linear()
+                .range([height, 0]);
+            var cdy = d3.scale.linear()
+                .range([height, 0]);
+            var popy = d3.scale.linear()
                 .range([height, 0]);
 
             var xAxis = d3.svg.axis()
@@ -244,6 +252,14 @@
 
             var sryAxis = d3.svg.axis()
                 .scale(sry)
+                .orient("left");
+
+            var cdyAxis = d3.svg.axis()
+                .scale(cdy)
+                .orient("left");
+
+            var popyAxis = d3.svg.axis()
+                .scale(popy)
                 .orient("left");
 
             var bwline = d3.svg.line()
@@ -270,6 +286,22 @@
                     return sry(d.stillborn);
                 });
 
+            var cdline = d3.svg.line()
+                .x(function (d) {
+                    return x(d.date);
+                })
+                .y(function (d) {
+                    return cdy(d.cong);
+                });
+
+            var popline = d3.svg.line()
+                .x(function (d) {
+                    return x(d.date);
+                })
+                .y(function (d) {
+                    return popy(d.pop);
+                });
+
             var bw = d3.select("#bw_chart")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
@@ -285,6 +317,17 @@
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            var cd = d3.select("#cd_chart")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            var pop = d3.select("#num_chart")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 
             x.domain(d3.extent(data, function (d) {
                 return d.date;
@@ -292,6 +335,8 @@
             bwy.domain([3.3, 3.9]);
             cry.domain([0, 35]);
             sry.domain([0, 1.4]);
+            cdy.domain([0, 0.5]);
+            popy.domain([7000, 9000]);
 
             bw.append("g")
                 .attr("class", "x axis")
@@ -364,6 +409,54 @@
                 .datum(data)
                 .attr("class", "line")
                 .attr("d", srline);
+
+            cd.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis)
+                .append("text")
+                .attr("x", "100")
+                .attr("y", "23")
+                .style("font-size", "10px")
+                .text("Month/Yr");
+
+            cd.append("g")
+                .attr("class", "y axis")
+                .call(cdyAxis)
+                .append("text")
+                .attr("x", "3")
+                .attr("y", "2")
+                .style("font-size", "10px")
+                .text("Congenital Disease Rate (% of Total)");
+
+            cd.append("path")
+                .datum(data)
+                .attr("class", "line")
+                .attr("d", cdline);
+
+            pop.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis)
+                .append("text")
+                .attr("x", "100")
+                .attr("y", "23")
+                .style("font-size", "10px")
+                .text("Month/Yr");
+
+            pop.append("g")
+                .attr("class", "y axis")
+                .call(popyAxis)
+                .append("text")
+                .attr("x", "3")
+                .attr("y", "2")
+                .style("font-size", "10px")
+                .text("Number of Births");
+
+            pop.append("path")
+                .datum(data)
+                .attr("class", "line")
+                .attr("d", popline);
 
         });
     </script>
