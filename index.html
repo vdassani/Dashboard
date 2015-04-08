@@ -8,13 +8,13 @@
 <body>
     <div id="wrapper">
         <div class="block">
-            <svg width="310" height="310" onclick="location.href='numChart.html';" class="links">
-                <g id="num_group">
-                    <rect id="num_rect" x="5" y="5" height="300" width="300" fill="#1B3277" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
+            <svg width="310" height="310" onclick="location.href='popChart.html';" class="links">
+                <g id="pop_group">
+                    <rect id="pop_rect" x="5" y="5" height="300" width="300" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
                     <text x="20" y="40" font-size="25" font-family="Arial">Number of Births</text>
                     <text x="20" y="60" font-size="15" font-family="Arial">(Across UAE 2012-2014)</text>
-                    <text id="num_val" x="120" y="120" font-size="50" font-family="Arial"></text>
-                    <svg id="num_chart" x="10" y="190" width="280" height="100"></svg>
+                    <text id="pop_val" x="120" y="120" font-size="50" font-family="Arial"></text>
+                    <svg id="pop_chart" x="10" y="190" width="280" height="100"></svg>
                 </g>
             </svg>
         </div>
@@ -22,7 +22,7 @@
             <!-- Birth Weight -->
             <svg width="310" height="310" onclick="location.href='c3BW.html';" class="links">
                 <g id="BW_group">
-                    <rect id="bw_rect" x="5" y="5" height="300" width="300" fill="orange" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
+                    <rect id="bw_rect" x="5" y="5" height="300" width="300" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
                     <text x="20" y="40" font-size="25" font-family="Arial">Birth Weight</text>
                     <text x="20" y="60" font-size="15" font-family="Arial">(Average kg)</text>
                     <text id="bw_val" x="150" y="120" font-size="50" font-family="Arial"></text>
@@ -37,12 +37,12 @@
             <!-- Stillbirth Rate -->
             <svg width="310" height="310" onclick="location.href='c3SR.html';" class="links">
                 <g id="SR_group">
-                    <rect id="sr_rect" x="5" y="5" height="300" width="300" fill="green" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
+                    <rect id="sr_rect" x="5" y="5" height="300" width="300" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
                     <text x="20" y="40" font-size="25" font-family="Arial">Stillbirth Rate</text>
                     <text x="20" y="60" font-size="15" font-family="Arial">(% of Total Births)</text>
                     <text id="sr_val" x="150" y="120" font-size="50" font-family="Arial"></text>
                     <text id="sr_per" x="150" y="150" font-size="25" font-family="Arial"></text>
-                    <text id="vs_tar2" x="235" y="150" font-size="12" font-family="Arial"></text>
+                    <text id="vs_tar2" x="232.5" y="150" font-size="12" font-family="Arial"></text>
                     <text id="sr_tar" x="150" y="170" font-size="15" font-family="Arial"></text>
                     <svg id="sr_chart" x="10" y="190" width="280" height="100"></svg>
                 </g>
@@ -52,7 +52,7 @@
             <!-- Cesarean Rate -->
             <svg width="310" height="310" onclick="location.href='c3CR.html';" class="links">
                 <g id="CR_group">
-                    <rect id="cr_rect" x="5" y="5" height="300" width="300" fill="red" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
+                    <rect id="cr_rect" x="5" y="5" height="300" width="300" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
                     <text x="20" y="40" font-size="25" font-family="Arial">Cesarean Rate</text>
                     <text x="20" y="60" font-size="15" font-family="Arial">(% of Total Births)</text>
                     <text id="cr_val" x="120" y="120" font-size="50" font-family="Arial"></text>
@@ -67,7 +67,7 @@
             <!-- Congenital Diseases -->
             <svg width="310" height="310" onclick="location.href='c3CD.html';" class="links">
                 <g id="CD_group">
-                    <rect id="cd_rect" x="5" y="5" height="300" width="300" fill="#1B3277" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
+                    <rect id="cd_rect" x="5" y="5" height="300" width="300" stroke="black" stroke-width="0.5" fill-opacity="0.7" />
                     <text x="20" y="40" font-size="25" font-family="Arial">Congenital Diseases</text>
                     <text x="20" y="60" font-size="15" font-family="Arial">(% of Total Births)</text>
                     <text id="cd_val" x="120" y="120" font-size="50" font-family="Arial"></text>
@@ -113,360 +113,13 @@
             </svg>
         </div>
     </div>
+    <script src="buildChart.js"></script>
     <script type="text/javascript">
-        d3.select("#vs_tar")
-            .attr("fill", "white")
-            .text("vs. target");
-        d3.select("#vs_tar2")
-            .attr("fill", "white")
-            .text("vs. target");
-        d3.select("#vs_tar3")
-            .attr("fill", "white")
-            .text("vs. target");
-        var numVal = "299,691";
-        var cdVal = 0.326;
-        d3.select("#num_val")
-
-        .attr("fill", "white")
-            .text(numVal);
-        d3.select("#cd_val")
-            .attr("fill", "white")
-            .text(cdVal + "%");
-        /* Birth Weight */
-        var bwValue = 3.71;
-        var bwTarget = 3.40;
-        bwTarget = bwTarget.toFixed(2);
-        d3.select("#bw_val")
-            .attr("fill", "white")
-            .text(bwValue + "kg");
-        var bwAverage = ((bwValue - bwTarget) / bwTarget) * 100;
-        var bw_prefix = "";
-
-        function roundToTwoBW(num) {
-            if (num > 0) {
-                bw_prefix = "+";
-            }
-            return +(Math.round(num + "e+2") + "e-2");
-        }
-        bwAverage = roundToTwoBW(bwAverage);
-        d3.select("#bw_per")
-            .attr("fill", "white")
-            .text(bw_prefix + bwAverage + "%");
-
-        d3.select("#bw_tar")
-            .attr("fill", "white")
-            .text("Target: " + bwTarget);
-        /* Cesarean Rate */
-        var crValue = 24.75;
-        var crTarget = 20;
-        d3.select("#cr_val")
-            .attr("fill", "white")
-            .text(crValue + "%");
-        var crAverage = (crValue - crTarget);
-        var cr_prefix = "";
-
-        function roundToTwoCR(num) {
-            if (num > 0) {
-                cr_prefix = "+";
-            }
-            return +(Math.round(num + "e+2") + "e-2");
-        }
-        crAverage = roundToTwoCR(crAverage);
-        d3.select("#cr_per")
-            .attr("fill", "white")
-            .text(cr_prefix + crAverage + "%");
-
-        d3.select("#cr_tar")
-            .attr("fill", "white")
-            .text("Target: " + crTarget + "%");
-        /* Stillbirth Rate */
-        var srValue = 0.73;
-        var srTarget = 0.80;
-        srTarget = srTarget.toFixed(2);
-        d3.select("#sr_val")
-            .attr("fill", "white")
-            .text(srValue + "%");
-        var srAverage = (srValue - srTarget);
-        var sr_prefix = "";
-
-        function roundToTwoSR(num) {
-            if (num > 0) {
-                sr_prefix = "+";
-            }
-            return +(Math.round(num + "e+2") + "e-2");
-        }
-        srAverage = roundToTwoSR(srAverage);
-        d3.select("#sr_per")
-            .attr("fill", "white")
-            .text(sr_prefix + srAverage + "%");
-
-        d3.select("#sr_tar")
-            .attr("fill", "white")
-            .text("Target: " + srTarget + "%");
-        /* Congenital Diseases*/
-    </script>
-    <script>
-        var margin = {
-                top: 10,
-                right: 5,
-                bottom: 25,
-                left: 25
-            },
-            width = 280 - margin.left - margin.right,
-            height = 100 - margin.top - margin.bottom;
-
-        var parseDate = d3.time.format("%d-%b-%y").parse;
-
-        d3.csv("d3data.csv", function (error, data) {
-            data.forEach(function (d) {
-                d.date = parseDate(d.date);
-                d.weight = +d.weight;
-                d.cesarean = +(d.cesarean * 100);
-                d.stillborn = +(d.stillborn * 100);
-                d.cong = +(d.cong * 100);
-                d.pop = +d.pop;
-            });
-
-            var x = d3.time.scale()
-                .range([0, width]);
-
-            var bwy = d3.scale.linear()
-                .range([height, 0]);
-            var cry = d3.scale.linear()
-                .range([height, 0]);
-            var sry = d3.scale.linear()
-                .range([height, 0]);
-            var cdy = d3.scale.linear()
-                .range([height, 0]);
-            var popy = d3.scale.linear()
-                .range([height, 0]);
-
-            var xAxis = d3.svg.axis()
-                .scale(x)
-                .orient("bottom");
-
-            var bwyAxis = d3.svg.axis()
-                .scale(bwy)
-                .orient("left");
-
-            var cryAxis = d3.svg.axis()
-                .scale(cry)
-                .orient("left");
-
-            var sryAxis = d3.svg.axis()
-                .scale(sry)
-                .orient("left");
-
-            var cdyAxis = d3.svg.axis()
-                .scale(cdy)
-                .orient("left");
-
-            var popyAxis = d3.svg.axis()
-                .scale(popy)
-                .orient("left");
-
-            var bwline = d3.svg.line()
-                .x(function (d) {
-                    return x(d.date);
-                })
-                .y(function (d) {
-                    return bwy(d.weight);
-                });
-
-            var crline = d3.svg.line()
-                .x(function (d) {
-                    return x(d.date);
-                })
-                .y(function (d) {
-                    return cry(d.cesarean);
-                });
-
-            var srline = d3.svg.line()
-                .x(function (d) {
-                    return x(d.date);
-                })
-                .y(function (d) {
-                    return sry(d.stillborn);
-                });
-
-            var cdline = d3.svg.line()
-                .x(function (d) {
-                    return x(d.date);
-                })
-                .y(function (d) {
-                    return cdy(d.cong);
-                });
-
-            var popline = d3.svg.line()
-                .x(function (d) {
-                    return x(d.date);
-                })
-                .y(function (d) {
-                    return popy(d.pop);
-                });
-
-            var bw = d3.select("#bw_chart")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            var cr = d3.select("#cr_chart")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            var sr = d3.select("#sr_chart")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            var cd = d3.select("#cd_chart")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            var pop = d3.select("#num_chart")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-            x.domain(d3.extent(data, function (d) {
-                return d.date;
-            }));
-            bwy.domain([3.2, 3.9]);
-            cry.domain([17.5, 30]);
-            sry.domain([0, 1.4]);
-            cdy.domain([0, 0.5]);
-            popy.domain([7000, 9000]);
-
-            bw.append("g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(xAxis)
-                .append("text")
-                .attr("x", "100")
-                .attr("y", "23")
-                .style("font-size", "10px")
-                .text("Month/Yr");
-
-            bw.append("g")
-                .attr("class", "y axis")
-                .call(bwyAxis)
-                .append("text")
-                .attr("x", "3")
-                .attr("y", "2")
-                .style("font-size", "10px")
-                .text("Avg weight (kg)");
-
-            bw.append("path")
-                .datum(data)
-                .attr("class", "line")
-                .attr("d", bwline)
-                .style("stroke", "white");
-
-            cr.append("g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(xAxis)
-                .append("text")
-                .attr("x", "100")
-                .attr("y", "23")
-                .style("font-size", "10px")
-                .text("Month/Yr");
-
-            cr.append("g")
-                .attr("class", "y axis")
-                .call(cryAxis)
-                .append("text")
-                .attr("x", "3")
-                .attr("y", "2")
-                .style("font-size", "10px")
-                .text("Cesarean Rate (% of Total)");
-
-            cr.append("path")
-                .datum(data)
-                .attr("class", "line")
-                .attr("d", crline)
-                .style("stroke", "white");
-
-            sr.append("g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(xAxis)
-                .append("text")
-                .attr("x", "100")
-                .attr("y", "23")
-                .style("font-size", "10px")
-                .text("Month/Yr");
-
-            sr.append("g")
-                .attr("class", "y axis")
-                .call(sryAxis)
-                .append("text")
-                .attr("x", "3")
-                .attr("y", "2")
-                .style("font-size", "10px")
-                .text("Stillbirth Rate (% of Total)");
-
-            sr.append("path")
-                .datum(data)
-                .attr("class", "line")
-                .attr("d", srline)
-                .style("stroke", "white");
-
-            cd.append("g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(xAxis)
-                .append("text")
-                .attr("x", "100")
-                .attr("y", "23")
-                .style("font-size", "10px")
-                .text("Month/Yr");
-
-            cd.append("g")
-                .attr("class", "y axis")
-                .call(cdyAxis)
-                .append("text")
-                .attr("x", "3")
-                .attr("y", "2")
-                .style("font-size", "10px")
-                .text("Congenital Disease Rate (% of Total)");
-
-            cd.append("path")
-                .datum(data)
-                .attr("class", "line")
-                .attr("d", cdline)
-                .style("stroke", "white");
-
-            pop.append("g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(xAxis)
-                .append("text")
-                .attr("x", "100")
-                .attr("y", "23")
-                .style("font-size", "10px")
-                .text("Month/Yr");
-
-            pop.append("g")
-                .attr("class", "y axis")
-                .call(popyAxis)
-                .append("text")
-                .attr("x", "3")
-                .attr("y", "2")
-                .style("font-size", "10px")
-                .text("Number of Births");
-
-            pop.append("path")
-                .datum(data)
-                .attr("class", "line")
-                .attr("d", popline)
-                .style("stroke", "white");
-
-        });
+        buildIt(true, "bw", "#bw_rect", 3.71, "#bw_val", "#bw_per", "kg", 3.4, "#bw_tar", "#vs_tar", "#bw_chart", "Avg. Weight (kg)");
+        buildIt(true, "sr", "#sr_rect", 0.73, "#sr_val", "#sr_per", "%", 0.80, "#sr_tar", "#vs_tar2", "#sr_chart", "Stillbirth Rate (% of Total)");
+        buildIt(true, "cr", "#cr_rect", 24.75, "#cr_val", "#cr_per", "%", 20, "#cr_tar", "#vs_tar3", "#cr_chart", "Cesarean Rate (% of Total)");
+        buildIt(false, "pop", "#pop_rect", "299,691", "#pop_val", "", "", "", "", "", "#pop_chart", "Number of Births");
+        buildIt(false, "cd", "#cd_rect", 0.326, "#cd_val", "", "%", "", "", "", "#cd_chart", "Congenital Disease (% of Total)");
     </script>
 </body>
 
