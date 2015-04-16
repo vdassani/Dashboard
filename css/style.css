@@ -27,3 +27,9 @@ body {
     stroke-width: 1.5px;
     shape-rendering: geometricPrecision;
 }
+@media (max-width: 650){
+    .block{
+        float: left;
+        margin: 0%;
+    }
+}
